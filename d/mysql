@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# If no arguments, just log into mysql shell
+if [ $# -eq 0 ]; then
+    d/docker-compose exec db mysql -u root -pmagento magento
+else
+    d/docker-compose exec -T db mysql -u root -pmagento magento "$@"
+fi

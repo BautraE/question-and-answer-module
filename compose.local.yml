@@ -1,0 +1,64 @@
+version: "3.9"
+
+name: qna-module
+
+services:
+  php:
+    env_file:
+      - ./.docker/.env.local
+    volumes:
+      - ~/.composer:/var/www/.composer
+    networks:
+      - magebit
+
+  xdebug:
+    env_file:
+      - ./.docker/.env.local
+    volumes:
+      - ~/.composer:/var/www/.composer
+    networks:
+      - magebit
+
+  nginx:
+    env_file:
+      - ./.docker/.env.local
+    networks:
+      - magebit
+
+  varnish:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.qna-module.tls=true
+      - traefik.http.routers.qna-module.entrypoints=https
+      - traefik.http.routers.qna-module.rule=Host(`qna-module.docker`)
+      - traefik.http.services.qna-module.loadbalancer.server.port=80
+    networks:
+      - magebit
+
+  db:
+    networks:
+      magebit:
+        aliases:
+          - db.qna-module.docker
+
+  redis:
+    networks:
+      magebit:
+        aliases:
+          - redis.qna-module.docker
+
+  opensearch:
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.qna-module-es.tls=true
+      - traefik.http.routers.qna-module-es.entrypoints=https
+      - traefik.http.routers.qna-module-es.rule=Host(`es.qna-module.docker`)
+      - traefik.http.services.qna-module-es.loadbalancer.server.port=9200
+    networks:
+      magebit:
+        aliases:
+          - es.qna-module.docker
+
+networks:
+  magebit:
+    external: true
