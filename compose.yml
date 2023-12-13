@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  php:
+    container_name: qna-module-php
+    image: 369129824209.dkr.ecr.eu-west-1.amazonaws.com/magebit-docker:php-8.1-fpm
+    volumes:
+      - ./.:/var/www/html
+      - sock_data:/sock
+    depends_on:
+      - db
+      - redis
+      - opensearch
+    environment:
+      - COMPOSER_VERSION=2.2
+
+  xdebug:
+    container_name: qna-module-php-xdebug
+    image: 369129824209.dkr.ecr.eu-west-1.amazonaws.com/magebit-docker:php-8.1-fpm-xdebug
+    environment:
+      - PHP_IDE_CONFIG=serverName=qna-module.docker
+    volumes:
+      - ./.:/var/www/html
+      - sock_data:/sock
+    depends_on:
+      - db
+      - redis
+      - opensearch
+
+  nginx:
+    container_name: qna-module-nginx
+    image: 369129824209.dkr.ecr.eu-west-1.amazonaws.com/magebit-docker:nginx-1.17
+    volumes:
+      - ./.:/var/www/html:ro
+      - sock_data:/sock
+    depends_on:
+      - php
+      - xdebug
+
+  db:
+    container_name: qna-module-mysql
+    image: mariadb:10.6
+    environment:
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=magento
+      - MYSQL_DATABASE=magento
+      - MYSQL_ROOT_PASSWORD=magento
+    volumes:
+      - ./.docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/
+      - db_data:/var/lib/mysql
+    networks:
+      default:
+        aliases:
+          - db.qna-module.docker
+
+  varnish:
+    container_name: qna-module-varnish
+    image: 369129824209.dkr.ecr.eu-west-1.amazonaws.com/magebit-docker:varnish-6.6
+    depends_on:
+      - nginx
+
+  redis:
+    container_name: qna-module-redis
+    image: redis:7.0
+    volumes:
+      - redis_data:/data
+    networks:
+      default:
+        aliases:
+          - redis.qna-module.docker
+
+  opensearch:
+    container_name: qna-module-opensearch
+    image: 369129824209.dkr.ecr.eu-west-1.amazonaws.com/magebit-docker:opensearch-2.5.0
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+    networks:
+      default:
+        aliases:
+          - es.qna-module.docker
+
+volumes:
+  sock_data:
+  db_data:
+  redis_data:
+  opensearch_data:
