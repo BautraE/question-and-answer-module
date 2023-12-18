@@ -1,0 +1,4 @@
+#!/bin/bash
+[ -z "$1" ] && echo "Please specify a compose CLI command (ex. install)" && exit
+
+d/cli-php composer "$@"

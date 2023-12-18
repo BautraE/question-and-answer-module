@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Bash script that checks which command to use - either docker compose or docker-compose
+
+DOCKER_COMPOSE="docker compose"
+NEW_DOCKER_VERSION=0
+
+docker compose version --short &> /dev/null || NEW_DOCKER_VERSION=$?
+
+if [ $NEW_DOCKER_VERSION -ne 0 ]; then
+    DOCKER_COMPOSE="docker-compose"
+fi
+
+# Check whether to use local compose or development compose file
+ENVIRONMENT_COMPOSE_LOCAL_FILE=./compose.local.yml
+ENVIRONMENT_COMPOSE_DEV_FILE=./compose.dev.yml
+
+ENVIRONMENT_COMPOSE_FILE=$ENVIRONMENT_COMPOSE_LOCAL_FILE
+
+if [ -f "$ENVIRONMENT_COMPOSE_DEV_FILE" ]; then
+    ENVIRONMENT_COMPOSE_FILE=$ENVIRONMENT_COMPOSE_DEV_FILE
+fi
+
+$DOCKER_COMPOSE -f compose.yml -f $ENVIRONMENT_COMPOSE_FILE "$@"
