@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magebit\QuestionsAndAnswers\Api\Data\QuestionInterface"
+                type="Magebit\QuestionsAndAnswers\Model\Question" />
+    <preference for="Magebit\QuestionsAndAnswers\Api\QuestionRepositoryInterface"
+                type="Magebit\QuestionsAndAnswers\Model\QuestionRepository" />
+    <preference for="Magebit\QuestionsAndAnswers\Api\QuestionManagementInterface"
+                type="Magebit\QuestionsAndAnswers\Model\QuestionManagement" />
+    <preference for="Magebit\QuestionsAndAnswers\Api\Data\QuestionSearchResultsInterface"
+                type="Magebit\QuestionsAndAnswers\Model\QuestionSearchResults" />
+</config>
