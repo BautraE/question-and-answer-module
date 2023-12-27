@@ -8,7 +8,8 @@ use Magebit\QuestionsAndAnswers\Model\ResourceModel\Question as ResourceQuestion
 use Magebit\QuestionsAndAnswers\Api\Data\QuestionInterface;
 use Magento\Framework\Model\AbstractModel;
 
-class Question extends AbstractModel implements QuestionInterface {
+class Question extends AbstractModel implements QuestionInterface 
+{
     /**
      * @return void
      */
@@ -18,19 +19,27 @@ class Question extends AbstractModel implements QuestionInterface {
     }
 
     /**
-     * @return ?string
+     * @return string|null
      */
     public function getId(): ?string
     {
         return $this->getData(self::QUESTION_ID);
     }
-
+    
+    /**
+     * @return string|null
+     */
+    public function getUserId(): ?string
+    {
+        return $this->getData(self::USER_ID);
+    }
+    
     /**
      * @return string
      */
-    public function getProduct(): string
+    public function getProductId(): string
     {
-        return $this->getData(self::PRODUCT);
+        return $this->getData(self::PRODUCT_ID);
     }
 
     /**
@@ -70,35 +79,35 @@ class Question extends AbstractModel implements QuestionInterface {
     /**
      * @return int
      */
-    public function getStatus(): int
+    public function getVisibility(): int
     {
-        return (int) $this->getData(self::STATUS);
+        return (int) $this->getData(self::VISIBILITY);
     }
 
     /**
-     * @param $status
+     * @param $visibility
      * @return QuestionInterface
      */
-    public function setStatus($status): QuestionInterface
+    public function setVisibility($visibility): QuestionInterface
     {
-        return $this->setData(self::STATUS, $status);
+        return $this->setData(self::VISIBILITY, $visibility);
     }
 
     /**
      * @return int
      */
-    public function getPosition(): int
+    public function getCreatedByAdmin(): int
     {
-        return (int) $this->getData(self::POSITION);
+        return (int) $this->getData(self::CREATED_BY_ADMIN);
     }
 
     /**
-     * @param $position
+     * @param $createdByAdmin
      * @return QuestionInterface
      */
-    public function setPosition($position): QuestionInterface
+    public function setCreatedByAdmin($createdByAdmin): QuestionInterface
     {
-        return $this->setData(self::POSITION, $position);
+        return $this->setData(self::CREATED_BY_ADMIN, $createdByAdmin);
     }
 
     /**
@@ -108,5 +117,4 @@ class Question extends AbstractModel implements QuestionInterface {
     {
         return $this->getData(self::UPDATED_AT);
     }
-
 }

@@ -17,5 +17,4 @@ class Collection extends AbstractCollection
     {
         $this->_init(Question::class, ResourceQuestion::class);
     }
-
 }

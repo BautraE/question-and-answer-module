@@ -35,7 +35,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      */
     private QuestionSearchResultsInterfaceFactory $searchResultsFactory;
     /**
-     * @var \Magebit\Faq\Model\QuestionFactory
+     * @var QuestionModelFactory
      */
     private QuestionModelFactory $questionModelFactory;
 
@@ -44,7 +44,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @param QuestionFactory $questionFactory
      * @param CollectionProcessorInterface $collectionProcessor
      * @param QuestionSearchResultsInterfaceFactory $searchResultsFactory
-     * @param \Magebit\Faq\Model\QuestionFactory $questionModelFactory
+     * @param QuestionModelFactory $questionModelFactory
      */
     public function __construct(
         ResourceQuestion $resourceQuestion,

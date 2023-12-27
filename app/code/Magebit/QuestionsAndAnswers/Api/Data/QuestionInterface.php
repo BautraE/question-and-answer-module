@@ -3,13 +3,16 @@
 declare(strict_types=1);
 
 namespace Magebit\QuestionsAndAnswers\Api\Data;
-interface QuestionInterface {
+
+interface QuestionInterface 
+{
     const QUESTION_ID = 'id';
-    const PRODUCT = 'product';
+    const PRODUCT_ID = 'product_id';
+    const USER_ID = 'user_id';
     const QUESTION = 'question';
     const ANSWER = 'answer';
-    const STATUS = 'status';
-    const POSITION = 'position';
+    const VISIBILITY = 'visibility';
+    const CREATED_BY_ADMIN = 'created_by_admin';
     const UPDATED_AT = 'updated_at';
 
     /**
@@ -20,13 +23,17 @@ interface QuestionInterface {
     /**
      * @return string
      */
-    public function getProduct(): string;
+    public function getProductId(): string;
+
+    /**
+     * @return string|null
+     */
+    public function getUserId(): ?string;
 
     /**
      * @return string
      */
     public function getQuestion(): string;
-
 
     /**
      * @param $question
@@ -39,7 +46,6 @@ interface QuestionInterface {
      */
     public function getAnswer(): string;
 
-
     /**
      * @param $answer
      * @return QuestionInterface
@@ -49,30 +55,29 @@ interface QuestionInterface {
     /**
      * @return int
      */
-    public function getStatus(): int;
+    public function getVisibility(): int;
 
 
     /**
-     * @param $status
+     * @param $visibility
      * @return QuestionInterface
      */
-    public function setStatus($status): QuestionInterface;
+    public function setVisibility($visibility): QuestionInterface;
 
     /**
      * @return int
      */
-    public function getPosition(): int;
+    public function getCreatedByAdmin(): int;
 
 
     /**
-     * @param $position
+     * @param $createdByAdmin
      * @return QuestionInterface
      */
-    public function setPosition($position): QuestionInterface;
+    public function setCreatedByAdmin($createdByAdmin): QuestionInterface;
 
     /**
      * @return string
      */
     public function getUpdatedAt(): string;
-
 }

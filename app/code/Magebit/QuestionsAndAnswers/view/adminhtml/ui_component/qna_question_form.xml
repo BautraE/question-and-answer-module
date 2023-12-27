@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">qna_question_form.qna_question_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Question</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="save" class="Magebit\QuestionsAndAnswers\Ui\Component\Form\Button\Save"/>
+            <button name="back" class="Magebit\QuestionsAndAnswers\Ui\Component\Form\Button\Back"/>
+        </buttons>
+        <namespace>qna_question_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>qna_question_form.qna_question_form_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="qna_question_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="qna/question/save"/>
+        </settings>
+        <dataProvider class="Magebit\QuestionsAndAnswers\Model\Question\QuestionDataProvider" name="qna_question_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <!-- Should be the same as the primary field name of the database table -->
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <!-- Database table primary field name -->
+                <dataScope>id</dataScope>
+            </settings>
+        </field>
+        <field name="visibility" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Question Visibility</label>
+                <dataScope>visibility</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="product_id" sortOrder="15" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Product ID</label>
+                <dataScope>product_id</dataScope>
+            </settings>
+        </field>
+        <!-- <field name="product" sortOrder="15" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Product Name</label>
+                <dataScope>product</dataScope>
+            </settings>
+        </field> -->
+        <field name="question" sortOrder="15" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Question</label>
+                <dataScope>question</dataScope>
+            </settings>
+        </field>
+        <field name="answer" sortOrder="20" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Answer</label>
+                <dataScope>answer</dataScope>
+            </settings>
+        </field>
+    </fieldset>
+</form>

@@ -15,5 +15,4 @@ class Question extends AbstractDb
     {
         $this->_init('product_questions', 'id');
     }
-
 }

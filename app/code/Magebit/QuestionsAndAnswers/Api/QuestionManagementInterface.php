@@ -6,17 +6,17 @@ namespace Magebit\QuestionsAndAnswers\Api;
 
 use Magebit\QuestionsAndAnswers\Api\Data\QuestionInterface;
 
-interface QuestionManagementInterface {
+interface QuestionManagementInterface 
+{
     /**
      * @param QuestionInterface $question
      * @return QuestionInterface
      */
-    public function enableQuestion(QuestionInterface $question): QuestionInterface;
+    public function showQuestion(QuestionInterface $question): QuestionInterface;
 
     /**
      * @param QuestionInterface $question
      * @return QuestionInterface
      */
-    public function disableQuestion(QuestionInterface $question): QuestionInterface;
-
+    public function hideQuestion(QuestionInterface $question): QuestionInterface;
 }

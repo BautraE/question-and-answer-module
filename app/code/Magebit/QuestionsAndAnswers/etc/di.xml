@@ -9,4 +9,35 @@
                 type="Magebit\QuestionsAndAnswers\Model\QuestionManagement" />
     <preference for="Magebit\QuestionsAndAnswers\Api\Data\QuestionSearchResultsInterface"
                 type="Magebit\QuestionsAndAnswers\Model\QuestionSearchResults" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="qna_question_listing_data_source" xsi:type="string">
+                    Magebit\QuestionsAndAnswers\Model\Grid\QnaQuestionCollection
+                </item>
+            </argument>
+            <argument name="collections" xsi:type="array">
+                <item name="qna_question_form_data_source" xsi:type="string">
+                    Magebit\QuestionsAndAnswers\Model\Form\QnaFormQuestionCollection
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magebit\QuestionsAndAnswers\Model\Grid\QnaQuestionCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">product_questions</argument>
+            <argument name="identifierName" xsi:type="string">id</argument>
+            <argument name="resourceModel" xsi:type="string">Magebit\QuestionsAndAnswers\Model\ResourceModel\Question</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magebit\QuestionsAndAnswers\Model\Form\QnaFormQuestionCollection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">product_questions</argument>
+            <argument name="identifierName" xsi:type="string">id</argument>
+            <argument name="resourceModel" xsi:type="string">Magebit\QuestionsAndAnswers\Model\ResourceModel\Question</argument>
+        </arguments>
+    </virtualType>
 </config>

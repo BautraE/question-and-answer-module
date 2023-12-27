@@ -8,7 +8,7 @@ use Magebit\QuestionsAndAnswers\Api\Data\QuestionSearchResultsInterface;
 use Magento\Framework\Api\SearchResults;
 
 /**
- * Service Data Object with Questions search results.
+ * Service Data Object with Product Questions search results.
  */
 class QuestionSearchResults extends SearchResults implements QuestionSearchResultsInterface
 {

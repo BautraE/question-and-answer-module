@@ -11,7 +11,7 @@ use Magebit\QuestionsAndAnswers\Api\QuestionManagementInterface;
 
 class QuestionManagement extends AbstractModel implements QuestionManagementInterface
 {
-    const STATUS = 'status';
+    const VISIBILITY = 'visibility';
 
     /**
      * @return void
@@ -25,17 +25,17 @@ class QuestionManagement extends AbstractModel implements QuestionManagementInte
      * @param $question
      * @return QuestionInterface
      */
-    public function enableQuestion($question): QuestionInterface
+    public function showQuestion($question): QuestionInterface
     {
-        return $question->setData(self::STATUS, 1);
+        return $question->setData(self::VISIBILITY, 1);
     }
 
     /**
      * @param $question
      * @return QuestionInterface
      */
-    public function disableQuestion($question): QuestionInterface
+    public function hideQuestion($question): QuestionInterface
     {
-        return $question->setData(self::STATUS, 0);
+        return $question->setData(self::VISIBILITY, 0);
     }
 }
