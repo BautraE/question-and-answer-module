@@ -1,0 +1,97 @@
+<?php
+/**
+ * @var QuestionList $block
+ * @var Escaper $escaper
+ */
+
+$questions = $block->getQuestions();
+?>
+
+<h3 class="legend">
+    Submitted Questions
+</h3>
+<?php if(!$questions): ?>
+    <?php $block->getNotice(); ?>
+<?php else: ?>
+    <div class="product-questions-table-container">
+    <table class="my-product-questions-table">
+        <tr>
+            <th>Product</th>
+            <th>Question</th>
+            <th>Status</th>
+            <th>Last Modified</th>
+            <th>Edit Question</th>
+            <th>Delete Question</th>
+        </tr>
+        <?php foreach ($questions as $question): ?>
+            <tr>
+                <td>
+                    <?= $escaper->escapeHtml($block->getProductName($question)) ?>
+                </td>
+                <td>
+                    <?= __($escaper->escapeHtml($question->getQuestion())) ?>
+                </td>
+                <td>
+                    <?= __($escaper->escapeHtml($block->isAnswered($question))) ?>
+                </td>
+                <td>
+                    <?= __($escaper->escapeHtml($question->getUpdatedAt())) ?>
+                </td>
+                <td>
+                    <?php if($question->getVisibility() === 0): ?>
+                        <a class="edit-question"
+                           data-question-id="<?= $question->getId() ?>" 
+                           data-question="<?= $question->getQuestion() ?>">
+                            Edit
+                        </a>
+                    <?php else: ?>
+                        <p class="disabled-link">
+                            Edit
+                        </p>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if($question->getVisibility() === 0): ?>
+                        <a class="delete-link" 
+                           data-question-id="<?= $question->getId() ?>" 
+                           data-deleteurl="<?= $block->getUrl('qnacus/account/deletemyquestion') ?>">
+                            Delete
+                        </a>
+                    <?php else: ?>
+                        <p class="disabled-link">
+                            Delete
+                        </p>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+    </div>
+
+    <div id="modal">
+        <div class="modal-edit-form">
+            <form action="<?= $block->getUrl('qnacus/account/editmyquestion') ?>" 
+                  method="post" 
+                  id="edit-question-by-owner" >
+                <input name="question_id" 
+                       type=hidden>
+                <p id="char-count"></p>
+                <textarea id="question-input" 
+                          name="question">
+                </textarea>
+                <p id="length-error-message" 
+                   class="input-error">
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Magebit_QuestionsAndAnswers/js/delete-confirmation": {},
+                "Magebit_QuestionsAndAnswers/js/edit-question-form": {}
+            }
+        }
+    </script>
+<?php endif; ?>

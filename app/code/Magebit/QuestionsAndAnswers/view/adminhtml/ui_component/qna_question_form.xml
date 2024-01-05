@@ -80,7 +80,7 @@
                 </checkbox>
             </formElements>
         </field>
-        <field name="product_id" sortOrder="15" formElement="input">
+        <field name="product_id" sortOrder="15" formElement="select">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">page</item>
@@ -91,25 +91,17 @@
                     <rule name="required-entry" xsi:type="boolean">true</rule>
                 </validation>
                 <dataType>text</dataType>
-                <label translate="true">Product ID</label>
+                <label translate="true">Product</label>
                 <dataScope>product_id</dataScope>
             </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magebit\QuestionsAndAnswers\Ui\Component\Form\Element\ProductOptions"/>
+                    </settings>
+                </select>
+            </formElements>
         </field>
-        <!-- <field name="product" sortOrder="15" formElement="input">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">page</item>
-                </item>
-            </argument>
-            <settings>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                </validation>
-                <dataType>text</dataType>
-                <label translate="true">Product Name</label>
-                <dataScope>product</dataScope>
-            </settings>
-        </field> -->
         <field name="question" sortOrder="15" formElement="input">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -119,6 +111,7 @@
             <settings>
                 <validation>
                     <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="max_text_length" xsi:type="number">200</rule>
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">Question</label>
@@ -132,6 +125,9 @@
                 </item>
             </argument>
             <settings>
+                <validation>
+                    <rule name="max_text_length" xsi:type="number">300</rule>
+                </validation>            
                 <dataType>text</dataType>
                 <label translate="true">Answer</label>
                 <dataScope>answer</dataScope>

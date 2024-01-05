@@ -1,0 +1,75 @@
+<?php
+/**
+ * @var QuestionList $block
+ * @var Escaper $escaper
+ */
+
+$questions = $block->getQuestions();
+$product = $block->getProduct();
+?>
+
+<div>
+    <h2>
+        <?= __("Customer Questions About ") ?>"<?=$escaper->escapeHtml($product->getName()) ?>"
+    </h2>
+    <h3>
+        <?= __("Ask Your Question") ?>
+    </h3>
+    <form action="<?= $block->getUrl('qnacus/product/newquestion') ?>" 
+          method="post" 
+          id="question-form"
+          class="submit-question-form clearfix">
+        <input name="product_id" 
+               type=hidden 
+               value="<?= $product->getId()?>">
+        <input name="created_by_admin" 
+               type=hidden 
+               value="0">
+        <p id="char-count"></p>
+        <p id="length-error-message" 
+           class="input-error"></p>
+        <textarea id="question-input" 
+                  name="question"></textarea>
+        <button class="question-submit-button" 
+                type="submit">
+                    <?= __("Submit") ?>
+        </button>
+    </form>
+    <h3>
+        <?= __("Answered Questions") ?>
+    </h3>
+    <?php if(!$questions): ?>
+        <p>
+            <?= __("There are currently no answered questions about this product.") ?>
+        </p>
+    <?php else: ?>
+        <div class="question-list-container">
+            <?php foreach ($questions as $question): ?>
+                <hr>
+                <h4 class="question-by-author-heading">
+                    <?=__("Question by "), $escaper->escapeHtml($block->getAuthorName($question)) ?>:
+                </h4>
+                <p class="last-modified-info">
+                    <?=__("Last Modified: "), $escaper->escapeHtml($question->getUpdatedAt())?>
+                </p>
+                <p>
+                    <?= __($escaper->escapeHtml($question->getQuestion())) ?>
+                </p>
+                <h4 class="answer-heading">
+                    <?= __("Answer:") ?>
+                </h4>
+                <p>
+                    <?= __($escaper->escapeHtml($question->getAnswer())) ?>
+                </p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magebit_QuestionsAndAnswers/js/submit-question": {}
+        }
+    }
+</script>
