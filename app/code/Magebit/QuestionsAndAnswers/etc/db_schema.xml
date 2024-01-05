@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="product_questions"
+           resource="default"
+           engine="innodb">
+        <column xsi:type="int"
+                name="id"
+                nullable="false"
+                identity="true"
+                comment="Question ID"/>
+        <constraint xsi:type="primary"
+                    referenceId="PRIMARY">
+            <column name="id" />
+        </constraint>
+        <!-- Foreign key for user_id column -->
+        <column xsi:type="int"
+                name="user_id"
+                nullable="true"
+                unsigned="true"
+                comment="User ID"/>
+        <constraint xsi:type="foreign" 
+                    referenceId="FK_PRODUCT_QUESTIONS_USER" 
+                    table="product_questions" 
+                    column="user_id" 
+                    referenceTable="customer_entity" 
+                    referenceColumn="entity_id" 
+                    onDelete="NO ACTION"/>
+        <!-- Foreign key for product_id column -->      
+        <column xsi:type="int"
+                name="product_id"
+                nullable="false"
+                unsigned="true"
+                comment="Product ID"/>
+        <constraint xsi:type="foreign" 
+                    referenceId="FK_PRODUCT_QUESTIONS_PRODUCT" 
+                    table="product_questions" 
+                    column="product_id" 
+                    referenceTable="catalog_product_entity" 
+                    referenceColumn="entity_id" 
+                    onDelete="CASCADE"/>
+        <column xsi:type="text"
+                name="question"
+                nullable="false"
+                comment="Question"/>
+        <column xsi:type="text"
+                name="answer"
+                nullable="true"
+                comment="Answer"/>
+        <column xsi:type="smallint"
+                name="visibility"
+                nullable="false"
+                default="0"
+                comment="Status"/>
+        <column xsi:type="boolean"
+                name="created_by_admin"
+                nullable="false"
+                default="true"
+                comment="Created by Admin"/>
+        <column xsi:type="timestamp"
+                name="updated_at"
+                on_update="true"
+                default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+        <index referenceId="QUESTIONS_QUESTION" indexType="fulltext">
+            <column name="question"/>
+        </index>
+    </table>
+</schema>
