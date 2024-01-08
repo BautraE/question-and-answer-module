@@ -41,11 +41,11 @@ class CustomerEmail extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
 
-                if(!$item['user_id']) {
+                if(!$item['customer_id']) {
                     $item['customer_email'] = NULL;
                 }
                 else {
-                    if (!$customer = $this->customerRepository->getById($item['user_id'])){
+                    if (!$customer = $this->customerRepository->getById($item['customer_id'])){
                         $item['customer_email'] = NULL;
                     }
                     else {

@@ -8,7 +8,7 @@ interface QuestionInterface
 {
     const QUESTION_ID = 'id';
     const PRODUCT_ID = 'product_id';
-    const USER_ID = 'user_id';
+    const CUSTOMER_ID = 'customer_id';
     const QUESTION = 'question';
     const ANSWER = 'answer';
     const VISIBILITY = 'visibility';
@@ -28,7 +28,7 @@ interface QuestionInterface
     /**
      * @return string|null
      */
-    public function getUserId(): ?string;
+    public function getCustomerId(): ?string;
 
     /**
      * @return string

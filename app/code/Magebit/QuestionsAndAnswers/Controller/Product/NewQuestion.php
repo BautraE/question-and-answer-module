@@ -60,7 +60,7 @@ class NewQuestion extends Action implements HttpPostActionInterface
         {
             $data = $this->getRequest()->getPostValue();
             $data['id'] = null;
-            $data['user_id'] = $this->customerSession->getCustomer()->getId();
+            $data['customer_id'] = $this->customerSession->getCustomer()->getId();
             
             $questionModel = $this->questionFactory->create();
             $questionModel->setData($data);
