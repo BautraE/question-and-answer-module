@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magebit\QuestionsAndAnswers\Ui\Component\Form\Button;
 
 use Magento\Cms\Block\Adminhtml\Page\Edit\GenericButton;

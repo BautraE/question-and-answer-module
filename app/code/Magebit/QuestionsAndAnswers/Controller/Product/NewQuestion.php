@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 namespace Magebit\QuestionsAndAnswers\Controller\Product;
 
 use Magento\Framework\App\Action\Action;

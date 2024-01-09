@@ -12,7 +12,6 @@ use Magebit\QuestionsAndAnswers\Model\ResourceModel\Question\CollectionFactory;
 use Magebit\QuestionsAndAnswers\Api\QuestionManagementInterface;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Framework\Exception\LocalizedException;
 
 class MassHide extends Action implements HttpPostActionInterface
 {
@@ -49,23 +48,32 @@ class MassHide extends Action implements HttpPostActionInterface
 
     /**
      * @return Redirect
-     * @throws LocalizedException
      */
     public function execute(): Redirect
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
+        /** @var Redirect $resultRedirect */
+        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $error = false;
 
-        foreach ($collection as $item) {
-            $this->questionManagementInterface->hideQuestion($item);
-            $item->save();
+        foreach ($collection as $question) {
+            try {
+                $this->questionManagementInterface->hideQuestion($question);
+                $question->save();
+            } catch (\Exception $exception) {
+                $this->messageManager->addExceptionMessage($exception);
+                $error = true;
+            }
+        }
+
+        if($error) {
+            return $resultRedirect->setPath('*/*/');
         }
 
         $this->messageManager->addSuccessMessage(
-            __('A total of %1 question(s) have been hidden.', $collection->getSize())
+            __('A total of %1 question(s) have been hidden!', $collection->getSize())
         );
 
-        /** @var Redirect $resultRedirect */
-        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('*/*/');
     }
 }

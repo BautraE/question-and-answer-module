@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magebit\QuestionsAndAnswers\Controller\Account;
 
 use Magento\Customer\Controller\AbstractAccount;
@@ -9,7 +11,7 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\View\Result\Page\Interceptor;
 use Magento\Customer\Model\Session as CustomerSession;
 
-class MyQuestions extends AbstractAccount implements HttpGetActionInterface
+class CustomerQuestions extends AbstractAccount implements HttpGetActionInterface
 {
     /**
      * @var PageFactory

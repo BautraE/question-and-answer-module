@@ -40,7 +40,6 @@ class InlineEdit extends Action implements HttpPostActionInterface
 
     /**
      * @return Json
-     * @throws LocalizedException
      */
     public function execute(): Json
     {
@@ -55,10 +54,10 @@ class InlineEdit extends Action implements HttpPostActionInterface
                 $error = true;
             } else {
                 foreach (array_keys($postItems) as $questionId) {
-                    $model = $this->questionRepository->get($questionId);
+                    $question = $this->questionRepository->get($questionId);
                     try {
-                        $model->setData(array_merge($model->getData(), $postItems[$questionId]));
-                        $this->questionRepository->save($model);
+                        $question->setData(array_merge($question->getData(), $postItems[$questionId]));
+                        $this->questionRepository->save($question);
                     } catch (\Exception $e) {
                         $messages[] = "[Error:]  {$e->getMessage()}";
                         $error = true;
@@ -66,6 +65,8 @@ class InlineEdit extends Action implements HttpPostActionInterface
                 }
             }
         }
+        $this->messageManager->addSuccessMessage(__("testing success"));
+
         return $resultJson->setData(
             [
                 'messages' => $messages,

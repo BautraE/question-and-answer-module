@@ -12,7 +12,7 @@
                     </argument>
                     <argument name="path" 
                               xsi:type="string">
-                                qnacus/account/myquestions
+                                qnacus/account/customerquestions
                     </argument>
                     <argument name="sortOrder" 
                               xsi:type="number">

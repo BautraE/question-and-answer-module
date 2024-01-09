@@ -42,7 +42,7 @@ class Delete extends Action implements HttpPostActionInterface
             try {
                 $questionModel = $this->questionRepository->get($questionId);
                 $this->questionRepository->delete($questionModel);
-                $this->messageManager->addSuccessMessage(__('The question has been deleted.'));
+                $this->messageManager->addSuccessMessage(__('The question has been deleted!'));
                 return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
@@ -50,7 +50,7 @@ class Delete extends Action implements HttpPostActionInterface
             }
         }
 
-        $this->messageManager->addErrorMessage(__('We can\'t find a question to delete.'));
+        $this->messageManager->addErrorMessage(__('We can\'t find a question to delete!'));
         return $resultRedirect->setPath('*/*/');
     }
 }

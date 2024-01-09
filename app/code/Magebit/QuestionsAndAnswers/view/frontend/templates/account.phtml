@@ -54,7 +54,7 @@ $questions = $block->getQuestions();
                     <?php if($question->getVisibility() === 0): ?>
                         <a class="delete-link" 
                            data-question-id="<?= $question->getId() ?>" 
-                           data-deleteurl="<?= $block->getUrl('qnacus/account/deletemyquestion') ?>">
+                           data-deleteurl="<?= $block->getUrl('qnacus/account/deletecustomerquestion') ?>">
                             Delete
                         </a>
                     <?php else: ?>
@@ -70,7 +70,7 @@ $questions = $block->getQuestions();
 
     <div id="modal">
         <div class="modal-edit-form">
-            <form action="<?= $block->getUrl('qnacus/account/editmyquestion') ?>" 
+            <form action="<?= $block->getUrl('qnacus/account/editcustomerquestion') ?>" 
                   method="post" 
                   id="edit-question-by-owner" >
                 <input name="question_id" 
