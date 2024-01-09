@@ -140,32 +140,31 @@
             </settings>
         </column>
         <column name="product_name" class="Magebit\QuestionsAndAnswers\Ui\Component\Listing\Column\ProductName">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Product Name</item>
-                </item>
-            </argument>
-        </column>
-        <column name="customer_name" class="Magebit\QuestionsAndAnswers\Ui\Component\Listing\Column\CustomerName">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Customer Name</item>
-                </item>
-            </argument>
-        </column>
-        <column name="customer_email" class="Magebit\QuestionsAndAnswers\Ui\Component\Listing\Column\CustomerEmail">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="filter" xsi:type="string">text</item>
-                    <item name="label" xsi:type="string" translate="true">Customer Email</item>
-                </item>
-            </argument>
-        </column>
-        <column name="created_by_admin">
             <settings>
                 <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Product Name</label>
+            </settings>
+        </column>
+        <column name="customer_name" class="Magebit\QuestionsAndAnswers\Ui\Component\Listing\Column\CustomerName">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Customer Name</label>
+            </settings>
+        </column>
+        <column name="customer_email" class="Magebit\QuestionsAndAnswers\Ui\Component\Listing\Column\CustomerEmail">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <label translate="true">Customer Email</label>
+            </settings>
+        </column>
+        <column name="created_by_admin" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <options class="Magebit\QuestionsAndAnswers\Model\Question\Source\CreatedByAdmin"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
                 <label translate="true">Created by Admin</label>
             </settings>
         </column>

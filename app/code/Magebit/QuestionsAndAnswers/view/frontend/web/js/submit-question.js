@@ -5,9 +5,10 @@ require([
 
     var maxLength = 200;
     var saveChangesButton = $('.question-submit-button');
+    var remainingChars = maxLength - $('#question-input').val().length;
 
     $('#question-input').on('input', function () {
-        var remainingChars = maxLength - $(this).val().length;
+        remainingChars = maxLength - $(this).val().length;
         $('#char-count').text('Characters remaining: ' + remainingChars);
         saveChangesButton.prop('disabled', remainingChars < 0 || remainingChars === maxLength);
 
@@ -23,6 +24,13 @@ require([
             $('#length-error-message').text('');
             $('#question-input').removeClass('edit-form-input-error');
             $('#char-count').removeClass('edit-form-char-count-error');
+        }
+    });
+
+    $('#question-form').submit(function (event) {
+        $('#question-input').trigger('input');
+        if(remainingChars === maxLength) {
+            event.preventDefault();
         }
     });
 });

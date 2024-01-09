@@ -46,16 +46,25 @@ class MassDelete extends Action implements HttpPostActionInterface
     public function execute(): Redirect
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
-        $collectionSize = $collection->getSize();
-
-        foreach ($collection as $question) {
-            $question->delete();
-        }
-
-        $this->messageManager->addSuccessMessage(__('A total of %1 question(s) have been deleted.', $collectionSize));
-
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $error = false;
+
+        foreach ($collection as $question) {
+            try {
+                $question->delete();
+            } catch (\Exception $exception) {
+                $this->messageManager->addExceptionMessage($exception);
+                $error = true;
+            }
+        }
+
+        if($error) {
+            return $resultRedirect->setPath('*/*/');
+        }
+
+        $collectionSize = $collection->getSize();
+        $this->messageManager->addSuccessMessage(__('A total of %1 question(s) have been deleted!', $collectionSize));
 
         return $resultRedirect->setPath('*/*/');
     }

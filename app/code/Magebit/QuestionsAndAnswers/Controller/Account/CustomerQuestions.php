@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magebit\QuestionsAndAnswers\Controller\Account;
 
 use Magento\Customer\Controller\AbstractAccount;

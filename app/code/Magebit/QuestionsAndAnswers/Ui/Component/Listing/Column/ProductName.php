@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Magebit\QuestionsAndAnswers\Ui\Component\Listing\Column;
 
 use Magento\Ui\Component\Listing\Columns\Column;

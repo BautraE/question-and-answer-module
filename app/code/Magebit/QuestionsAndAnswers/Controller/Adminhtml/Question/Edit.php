@@ -63,8 +63,7 @@ class Edit extends Action implements HttpPostActionInterface
         if($questionId) {
             $questionModel = $this->questionRepository->get((int) $questionId);
             if (!$questionModel->getId()) {
-                $this->messageManager->addErrorMessage(__('This question no longer exists.'));
-
+                $this->messageManager->addErrorMessage(__('This question no longer exists!'));
                 $resultRedirect = $this->resultRedirectFactory->create();
                 return $resultRedirect->setPath('*/*/');
             }

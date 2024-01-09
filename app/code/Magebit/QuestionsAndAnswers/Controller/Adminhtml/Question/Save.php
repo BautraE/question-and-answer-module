@@ -58,12 +58,10 @@ class Save extends Action implements HttpPostActionInterface
 
             try {
                 $this->questionRepository->save($questionModel);
-                $this->messageManager->addSuccessMessage(__('You saved the question.'));
+                $this->messageManager->addSuccessMessage(__('You saved the question!'));
                 return $this->processResultRedirect($resultRedirect, $questionModel);
-            } catch (LocalizedException $exception) {
+            } catch (\Exception $exception) {
                 $this->messageManager->addExceptionMessage($exception);
-            } catch (\Throwable $error) {
-                $this->messageManager->addErrorMessage(__('Something went wrong while saving the question!'));
             }
         }
 
