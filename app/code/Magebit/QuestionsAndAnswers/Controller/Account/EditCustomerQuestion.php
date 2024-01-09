@@ -6,11 +6,11 @@ namespace Magebit\QuestionsAndAnswers\Controller\Account;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magebit\QuestionsAndAnswers\Api\QuestionRepositoryInterface;
-use Magento\Framework\Controller\Result\Redirect;
 
-class DeleteMyQuestion extends Action implements HttpPostActionInterface
+class EditCustomerQuestion extends Action implements HttpPostActionInterface
 {
     /**
      * @var QuestionRepositoryInterface
@@ -38,22 +38,23 @@ class DeleteMyQuestion extends Action implements HttpPostActionInterface
 
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
-        $resultRedirect->setPath('qnacus/account/myquestions');
+        $resultRedirect->setPath('qnacus/account/customerquestions');
 
         $questionModel = $this->questionRepository->get((int) $data['question_id']);
 
         if($questionModel->getId()) {
+            $questionModel->setQuestion($data['question']);
             try {
-                $this->questionRepository->delete($questionModel);
-                $this->messageManager->addSuccessMessage(__('Your question has been deleted successfully!'));
+                $this->questionRepository->save($questionModel);
+                $this->messageManager->addSuccessMessage(__('Your changes have been saved successfully!'));
                 return $resultRedirect;
             } catch (\Exception $error) {
-                $this->messageManager->addErrorMessage(__('Something went wrong while trying delete your question!'));
+                $this->messageManager->addErrorMessage(__('Something went wrong while trying to save your changes!'));
                 return $resultRedirect;
             }
         }
 
-        $this->messageManager->addErrorMessage(__('We can\'t find a question to delete!'));
+        $this->messageManager->addErrorMessage(__('This question no longer exists!'));
         return $resultRedirect;
     }
 }
