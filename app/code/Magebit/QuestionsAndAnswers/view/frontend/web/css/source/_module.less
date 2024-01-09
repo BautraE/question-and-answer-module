@@ -1,0 +1,86 @@
+// My Account page -> Product Questions (account.phtml): 
+// Question List:
+.disabled-link {
+    color: grey;
+    text-decoration: line-through;
+}
+.product-questions-table-container {
+    overflow-x: auto;
+}
+.my-product-questions-table{
+    td, th {
+        border-right: 1px solid gray;
+        border-bottom: 1px solid gray;
+        &:last-child {
+            border-right: none;
+        }
+    }
+    tr:last-child {
+        td, th {
+            border-bottom: none;
+        }
+    }
+}
+// Edit question form:
+.save-changes {
+    background-color: #006bb4;
+    color: white;
+    &:hover {
+        background-color: #00497a;
+        color: white;
+    }
+}
+.input-error {
+    color: red;
+}
+.edit-form-input-error{
+    border-color: red;
+}
+.edit-form-char-count-error{
+    color: red;
+}
+
+// Any product page -> Product Questions (questions.phtml)
+@media screen and (min-width: 780px) {
+    .submit-question-form{
+        width: 90%;
+    }
+}
+@media screen and (min-width: 900px) {
+    .submit-question-form{
+        width: 80%;
+    }
+}
+@media screen and (min-width: 1000px) {
+    .submit-question-form{
+        width: 70%;
+    }
+}
+@media screen and (min-width: 1100px) {
+    .submit-question-form{
+        width: 60%;
+    }
+}
+@media screen and (min-width: 1300px) {
+    .submit-question-form{
+        width: 50%;
+    }
+}
+.question-submit-button {
+    float: right;
+}
+.clearfix::after {
+    clear: both;
+}
+.question-list-container hr:first-child {
+    display: none;
+}
+.question-by-author-heading {
+    margin-bottom: 5px;
+}
+.last-modified-info {
+    color: gray;
+}
+.answer-heading {
+    margin-bottom: 10px;
+}
