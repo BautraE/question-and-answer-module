@@ -13,16 +13,16 @@
                     referenceId="PRIMARY">
             <column name="id" />
         </constraint>
-        <!-- Foreign key for user_id column -->
+        <!-- Foreign key for customer_id column -->
         <column xsi:type="int"
-                name="user_id"
+                name="customer_id"
                 nullable="true"
                 unsigned="true"
-                comment="User ID"/>
+                comment="Customer ID"/>
         <constraint xsi:type="foreign" 
-                    referenceId="FK_PRODUCT_QUESTIONS_USER" 
+                    referenceId="FK_PRODUCT_QUESTIONS_CUSTOMER" 
                     table="product_questions" 
-                    column="user_id" 
+                    column="customer_id" 
                     referenceTable="customer_entity" 
                     referenceColumn="entity_id" 
                     onDelete="NO ACTION"/>
@@ -62,7 +62,8 @@
                 on_update="true"
                 default="CURRENT_TIMESTAMP"
                 comment="Updated At"/>
-        <index referenceId="QUESTIONS_QUESTION" indexType="fulltext">
+        <index referenceId="QUESTIONS_QUESTION" 
+               indexType="fulltext">
             <column name="question"/>
         </index>
     </table>

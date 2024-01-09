@@ -82,7 +82,7 @@ class QuestionList extends Template
             ->setDirection('DESC')
             ->create();
         $searchCriteria = $this->searchCriteriaBuilder
-            ->addFilter('user_id', $customerId, 'eq')
+            ->addFilter('customer_id', $customerId, 'eq')
             ->setSortOrders([$sortOrder])
             ->create();
 

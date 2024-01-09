@@ -101,7 +101,7 @@ class QuestionList extends Template
         if($question->getCreatedByAdmin()) {
             return "(admin)";
         }
-        $customerId = $question->getUserId();
+        $customerId = $question->getCustomerId();
         $customer = $this->customerRepository->getById($customerId);
         if (!$customer->getId()) {
             return '(deleted user)';

@@ -29,9 +29,9 @@ class Question extends AbstractModel implements QuestionInterface
     /**
      * @return string|null
      */
-    public function getUserId(): ?string
+    public function getCustomerId(): ?string
     {
-        return $this->getData(self::USER_ID);
+        return $this->getData(self::CUSTOMER_ID);
     }
     
     /**
